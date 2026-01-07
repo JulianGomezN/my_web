@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portafolio profesional - Desarrollador Web">
+    <title>Mi Portafolio Profesional</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">Mi Portafolio</div>
+            <ul class="nav-menu">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#about">Quién Soy</a></li>
+                <li><a href="#resume">Currículum</a></li>
+                <li><a href="#skills">Habilidades</a></li>
+                <li><a href="#projects">Proyectos</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Hero -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Hola, soy <span class="highlight">Tu Nombre</span></h1>
+                <h2>Desarrollador Web Full Stack</h2>
+                <p>Creando experiencias digitales innovadoras y soluciones tecnológicas</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Contáctame</a>
+                    <a href="#projects" class="btn btn-secondary">Ver Proyectos</a>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/TuUsuario" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/tuusuario" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://twitter.com/tuusuario" target="_blank"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Quién Soy -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Quién Soy</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/300" alt="Tu foto profesional">
+                </div>
+                <div class="about-text">
+                    <h3>Sobre Mí</h3>
+                    <p>
+                        Soy un desarrollador web apasionado con experiencia en crear aplicaciones 
+                        web modernas y escalables. Me especializo en tecnologías front-end y back-end, 
+                        con un enfoque en la experiencia del usuario y código limpio.
+                    </p>
+                    <p>
+                        Con años de experiencia en el desarrollo de software, he trabajado en 
+                        diversos proyectos que van desde aplicaciones web empresariales hasta 
+                        startups innovadoras. Mi objetivo es crear soluciones tecnológicas que 
+                        tengan un impacto real en los usuarios.
+                    </p>
+                    <div class="about-info">
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>tu.email@ejemplo.com</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Tu Ciudad, País</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Título Universitario</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Currículum -->
+    <section id="resume" class="resume">
+        <div class="container">
+            <h2 class="section-title">Currículum</h2>
+            <div class="resume-content">
+                <div class="resume-column">
+                    <h3><i class="fas fa-briefcase"></i> Experiencia Profesional</h3>
+                    <div class="resume-item">
+                        <h4>Desarrollador Full Stack Senior</h4>
+                        <span class="resume-date">2022 - Presente</span>
+                        <p class="resume-company">Nombre de la Empresa</p>
+                        <ul>
+                            <li>Desarrollo de aplicaciones web usando React, Node.js y MongoDB</li>
+                            <li>Implementación de arquitecturas escalables y mantenibles</li>
+                            <li>Liderazgo de equipo y revisión de código</li>
+                        </ul>
+                    </div>
+                    <div class="resume-item">
+                        <h4>Desarrollador Web</h4>
+                        <span class="resume-date">2020 - 2022</span>
+                        <p class="resume-company">Otra Empresa</p>
+                        <ul>
+                            <li>Desarrollo de interfaces de usuario responsivas</li>
+                            <li>Integración con APIs REST y GraphQL</li>
+                            <li>Optimización de rendimiento web</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="resume-column">
+                    <h3><i class="fas fa-graduation-cap"></i> Educación</h3>
+                    <div class="resume-item">
+                        <h4>Ingeniería en Sistemas</h4>
+                        <span class="resume-date">2016 - 2020</span>
+                        <p class="resume-company">Universidad Nacional</p>
+                        <ul>
+                            <li>Especialización en Desarrollo de Software</li>
+                            <li>Proyecto de grado en Inteligencia Artificial</li>
+                        </ul>
+                    </div>
+                    <div class="resume-item">
+                        <h4>Certificaciones</h4>
+                        <span class="resume-date">2020 - 2023</span>
+                        <ul>
+                            <li>AWS Certified Solutions Architect</li>
+                            <li>Full Stack Web Development (Udemy)</li>
+                            <li>Advanced JavaScript (Platzi)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="resume-download">
+                <a href="cv.pdf" class="btn btn-primary" download>
+                    <i class="fas fa-download"></i> Descargar CV
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Habilidades -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Habilidades</h2>
+            <div class="skills-content">
+                <div class="skill-category">
+                    <h3>Front-end</h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>HTML/CSS</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>JavaScript</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>React</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Vue.js</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Back-end</h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Node.js</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 88%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Python</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Express.js</span>
+                            <span>82%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 82%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>MongoDB</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Herramientas</h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Git/GitHub</span>
+                            <span>92%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 92%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Docker</span>
+                            <span>78%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 78%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>AWS</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>CI/CD</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Proyectos -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Proyectos</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x250" alt="Proyecto 1">
+                        <div class="project-overlay">
+                            <a href="https://github.com/tuusuario/proyecto1" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://proyecto1-demo.com" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>E-commerce Platform</h3>
+                        <p>
+                            Plataforma de comercio electrónico completa construida con MERN stack. 
+                            Incluye autenticación, carrito de compras, pasarela de pago y panel de administración.
+                        </p>
+                        <div class="project-tags">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>MongoDB</span>
+                            <span>Stripe</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x250" alt="Proyecto 2">
+                        <div class="project-overlay">
+                            <a href="https://github.com/tuusuario/proyecto2" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://proyecto2-demo.com" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Task Management App</h3>
+                        <p>
+                            Aplicación de gestión de tareas con tableros Kanban, colaboración en tiempo real 
+                            y notificaciones. Desarrollada con Vue.js y Firebase.
+                        </p>
+                        <div class="project-tags">
+                            <span>Vue.js</span>
+                            <span>Firebase</span>
+                            <span>Vuex</span>
+                            <span>WebSocket</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x250" alt="Proyecto 3">
+                        <div class="project-overlay">
+                            <a href="https://github.com/tuusuario/proyecto3" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://proyecto3-demo.com" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Weather Dashboard</h3>
+                        <p>
+                            Dashboard meteorológico con visualizaciones de datos en tiempo real, 
+                            pronósticos y mapas interactivos usando la API de OpenWeather.
+                        </p>
+                        <div class="project-tags">
+                            <span>JavaScript</span>
+                            <span>Chart.js</span>
+                            <span>API REST</span>
+                            <span>Leaflet</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x250" alt="Proyecto 4">
+                        <div class="project-overlay">
+                            <a href="https://github.com/tuusuario/proyecto4" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://proyecto4-demo.com" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Portfolio Generator</h3>
+                        <p>
+                            Generador de portafolios web personalizado que permite a los usuarios 
+                            crear su sitio profesional sin conocimientos de programación.
+                        </p>
+                        <div class="project-tags">
+                            <span>React</span>
+                            <span>TypeScript</span>
+                            <span>Tailwind</span>
+                            <span>Next.js</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contacto</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>¡Hablemos!</h3>
+                    <p>
+                        ¿Tienes un proyecto en mente o quieres colaborar? No dudes en contactarme. 
+                        Estoy siempre abierto a nuevas oportunidades y desafíos.
+                    </p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>tu.email@ejemplo.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Teléfono</h4>
+                                <p>+XX XXX XXX XXXX</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Ubicación</h4>
+                                <p>Tu Ciudad, País</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-social">
+                        <a href="https://github.com/TuUsuario" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/tuusuario" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://twitter.com/tuusuario" target="_blank"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form-container">
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Tu Nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Tu Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" name="subject" placeholder="Asunto" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" rows="5" placeholder="Tu Mensaje" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Enviar Mensaje
+                        </button>
+                    </form>
+                    <div id="formMessage" class="form-message"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Tu Nombre. Todos los derechos reservados.</p>
+            <p>Hecho con <i class="fas fa-heart"></i> usando HTML, CSS y JavaScript</p>
+        </div>
+    </footer>
+
+    <!-- Botón volver arriba -->
+    <button id="scrollTop" class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
