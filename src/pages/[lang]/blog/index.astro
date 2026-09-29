@@ -1,0 +1,65 @@
+---
+/**
+ * Blog index. Only generated for languages with at least one published post
+ * (`draft: false`), so the blog stays hidden until the first post is ready.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import type { Lang } from '../../../i18n/ui';
+import { localePath, supportedLangs, useTranslations } from '../../../i18n/utils';
+import { getPublishedPosts, hasPublishedPosts } from '../../../lib/blog';
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const lang of supportedLangs) {
+    if (await hasPublishedPosts(lang)) paths.push({ params: { lang } });
+  }
+  return paths;
+}
+
+const lang = Astro.params.lang as Lang;
+const t = useTranslations(lang);
+const posts = await getPublishedPosts(lang);
+const otherLang = supportedLangs.find((l) => l !== lang) ?? lang;
+const otherHasBlog = await hasPublishedPosts(otherLang);
+const langSwitchHref = otherHasBlog ? localePath(otherLang, 'blog/') : localePath(otherLang);
+const dateFormat = new Intl.DateTimeFormat(lang === 'es' ? 'es-CO' : 'en-US', { dateStyle: 'long', timeZone: 'UTC' });
+---
+
+<BaseLayout
+  lang={lang}
+  title={t.blog.title}
+  description={t.blog.subtitle}
+  showBlog
+  current="blog"
+  langSwitchHref={langSwitchHref}
+  alternates={otherHasBlog}
+>
+  <section class="section page-top">
+    <div class="container">
+      <header class="section-header">
+        <span class="section-label" aria-hidden="true">// blog</span>
+        <h1 class="section-title">{t.blog.title}</h1>
+        <p class="section-subtitle">{t.blog.subtitle}</p>
+      </header>
+
+      <ul class="post-list">
+        {
+          posts.map((post) => {
+            const slug = post.id.split('/').slice(1).join('/');
+            return (
+              <li class="card post-item">
+                <h2>
+                  <a href={localePath(lang, `blog/${slug}/`)}>{post.data.title}</a>
+                </h2>
+                <p class="cert-date">
+                  <time datetime={post.data.date.toISOString()}>{dateFormat.format(post.data.date)}</time>
+                </p>
+                <p>{post.data.description}</p>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

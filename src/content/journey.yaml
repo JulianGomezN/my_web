@@ -1,0 +1,122 @@
+# Timeline shown in the "Journey / Trayectoria" section.
+# - Dates use 'YYYY-MM'. Leave `end` out for ongoing entries.
+# - `url` is optional (e.g. the generative-models seminar website).
+# - `org` can be a single string or { en, es }. In English, always write
+#   "National University of Colombia" instead of "Universidad Nacional de Colombia".
+# - Order on the page is automatic: ongoing first, then most recent.
+
+- id: unal
+  kind: education
+  org:
+    en: National University of Colombia
+    es: Universidad Nacional de Colombia
+  place: Bogotá, Colombia
+  start: '2022-03'
+  title:
+    en: B.S. in Systems and Computer Engineering
+    es: Ingeniería de Sistemas y Computación
+  points:
+    en:
+      - Building strong foundations in Artificial Intelligence, Machine Learning and Data Science.
+      - Involved in academic and volunteer initiatives related to technology and management.
+    es:
+      - Consolidando bases sólidas en Inteligencia Artificial, Machine Learning y Ciencia de Datos.
+      - Participación en iniciativas académicas y de voluntariado relacionadas con tecnología y gestión.
+
+- id: generative-models-seminar
+  kind: research
+  org:
+    en: Generative Models Research Seminar · National University of Colombia
+    es: Semillero de Investigación en Modelos Generativos · Universidad Nacional de Colombia
+  place: Bogotá, Colombia
+  start: '2025-10'
+  featured: true
+  title:
+    en: Member
+    es: Miembro del semillero de investigación en modelos generativos
+  points:
+    en:
+      - Continuous study and exploration of different families of generative models.
+      - Developed and redesigned the seminar's official website.
+    es:
+      - Estudio y exploración continua de distintas familias de modelos generativos.
+      - Desarrollé y rediseñé el sitio web oficial del semillero.
+
+- id: aws-student-community-day
+  kind: event
+  org: Amazon Web Services
+  place: Bogotá, Colombia
+  start: '2026-07'
+  end: '2026-07'
+  title:
+    en: AWS Student Community Day · Participant
+    es: AWS Student Community Day · Participante
+  points:
+    en:
+      - Community event on cloud and AI services with AWS.
+    es:
+      - Evento comunitario sobre servicios de cloud e IA con AWS.
+
+- id: fin-un
+  kind: community
+  org: UNAL Finance Club (FIN-UN)
+  place: Bogotá, Colombia
+  start: '2024-10'
+  end: '2026-08'
+  title:
+    en: Member
+    es: Miembro
+  points:
+    en:
+      - Analysis of financial and economic topics relevant to university management and student initiatives.
+    es:
+      - Análisis de temas financieros y económicos relevantes para la gestión universitaria y las iniciativas estudiantiles.
+
+- id: ieee-tems-un
+  kind: community
+  org: IEEE Technology & Engineering Management Society (TEMS UN)
+  place: Bogotá, Colombia
+  start: '2022-03'
+  end: '2026-02'
+  title:
+    en: Secretary & Member
+    es: Secretario y miembro
+  points:
+    en:
+      - Coordinated administrative and communication activities of the student chapter.
+      - Helped organize events on engineering and technology management.
+      - Encouraged student participation in interdisciplinary and professional development initiatives.
+    es:
+      - Coordiné actividades administrativas y de comunicación del capítulo estudiantil.
+      - Apoyé la organización de eventos sobre gestión de ingeniería y tecnología.
+      - Promoví la participación estudiantil en iniciativas interdisciplinarias y de desarrollo profesional.
+
+- id: ieee-computer-society
+  kind: community
+  org: IEEE Computer Society
+  place: Bogotá, Colombia
+  start: '2025-03'
+  end: '2026-02'
+  title:
+    en: Member
+    es: Miembro
+  points:
+    en:
+      - Took part in technical outreach and in promoting good practices in computer science.
+    es:
+      - Participé en actividades de divulgación técnica y en la promoción de buenas prácticas en computación.
+
+- id: school
+  kind: education
+  org: Colegio RR Oblatas al Divino Amor
+  place: Bogotá, Colombia
+  start: '2015-02'
+  end: '2020-11'
+  title:
+    en: Academic high school diploma
+    es: Bachillerato académico
+  points:
+    en:
+      - Graduated with a focus on mathematics and computing fundamentals.
+    es:
+      - Graduado con énfasis en matemáticas y fundamentos de computación.

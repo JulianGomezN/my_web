@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from './SectionHeader.astro';
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+import {
+  certificationLink,
+  formatYearMonth,
+  getFeatured,
+  groupByCategory,
+  LINKEDIN_CERTS_URL,
+} from '../lib/content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const certs = (await getCollection('certifications')).map((entry) => entry.data);
+const featured = getFeatured(certs);
+const groups = groupByCategory(certs);
+---
+
+<section id="certifications" class="section section-alt" aria-labelledby="certifications-title">
+  <div class="container">
+    <SectionHeader
+      id="certifications-title"
+      label={t.certifications.label}
+      title={t.certifications.title}
+      subtitle={t.certifications.subtitle}
+    />
+
+    <h3 class="cert-subheading">{t.certifications.featured}</h3>
+    <ul class="cert-featured">
+      {
+        featured.map((cert) => (
+          <li class="card cert-card reveal" data-cert={cert.id}>
+            <h4>{cert.name}</h4>
+            <p class="cert-issuer">{cert.issuer}</p>
+            <p class="cert-date">
+              <time datetime={cert.date}>{formatYearMonth(cert.date, lang)}</time>
+              {cert.expires && (
+                <>
+                  {' · '}
+                  {t.certifications.expires} <time datetime={cert.expires}>{formatYearMonth(cert.expires, lang)}</time>
+                </>
+              )}
+            </p>
+            <a href={certificationLink(cert)} target="_blank" rel="noopener noreferrer">
+              {t.certifications.viewCredential}
+              <span class="visually-hidden">: {cert.name} ({t.a11y.opensNewTab})</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <details class="card cert-all">
+      <summary>
+        <span>{t.certifications.seeAll} ({certs.length})</span>
+        <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+      </summary>
+      <div class="cert-groups">
+        {
+          groups.map((group) => (
+            <section class="cert-group" aria-label={t.certifications.categories[group.category]}>
+              <h4>{t.certifications.categories[group.category]}</h4>
+              <ul>
+                {group.items.map((cert) => (
+                  <li data-cert={cert.id}>
+                    <span>
+                      <a href={certificationLink(cert)} target="_blank" rel="noopener noreferrer">
+                        {cert.name}
+                        <span class="visually-hidden"> ({t.a11y.opensNewTab})</span>
+                      </a>
+                      <span class="cert-issuer">{cert.issuer}</span>
+                    </span>
+                    <time class="cert-date" datetime={cert.date}>
+                      {formatYearMonth(cert.date, lang)}
+                    </time>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))
+        }
+      </div>
+    </details>
+
+    <a class="cert-linkedin" href={LINKEDIN_CERTS_URL} target="_blank" rel="noopener noreferrer">
+      <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+      {t.certifications.linkedin}
+      <span class="visually-hidden"> ({t.a11y.opensNewTab})</span>
+    </a>
+  </div>
+</section>

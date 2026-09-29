@@ -1,0 +1,79 @@
+---
+/**
+ * Decorative neural-network drawing for the hero (static SVG, no JS).
+ * Layers of nodes fully connected to the next layer, with a slow pulse.
+ * Animations are disabled by the global prefers-reduced-motion rule.
+ */
+const width = 720;
+const height = 420;
+const layers = [4, 6, 6, 3];
+const xStep = width / (layers.length + 1);
+
+const nodes = layers.map((count, layer) =>
+  Array.from({ length: count }, (_, i) => ({
+    x: Math.round(xStep * (layer + 1)),
+    y: Math.round((height / (count + 1)) * (i + 1)),
+    // Deterministic delay so the build output is stable.
+    delay: ((layer * 7 + i * 3) % 10) / 2,
+  })),
+);
+
+const edges = nodes.slice(0, -1).flatMap((layer, l) =>
+  layer.flatMap((from) => nodes[l + 1].map((to) => ({ x1: from.x, y1: from.y, x2: to.x, y2: to.y }))),
+);
+---
+
+<svg class="neural-bg" viewBox={`0 0 ${width} ${height}`} aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="nn-edge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.45"></stop>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.45"></stop>
+    </linearGradient>
+  </defs>
+  <g class="nn-edges" stroke="url(#nn-edge)" stroke-width="1">
+    {edges.map((e) => <line x1={e.x1} y1={e.y1} x2={e.x2} y2={e.y2} />)}
+  </g>
+  <g class="nn-nodes">
+    {
+      nodes.flat().map((n) => (
+        <circle cx={n.x} cy={n.y} r="7" style={`animation-delay: ${n.delay}s`} />
+      ))
+    }
+  </g>
+</svg>
+
+<style>
+  .nn-edges line {
+    stroke-dasharray: 4 6;
+    animation: nn-flow 6s linear infinite;
+  }
+
+  .nn-nodes circle {
+    fill: #0b0f1a;
+    stroke: #a78bfa;
+    stroke-width: 2;
+    animation: nn-pulse 5s ease-in-out infinite;
+  }
+
+  :global(:root:not(.dark)) .nn-nodes circle {
+    fill: #f7f8fc;
+    stroke: #7c3aed;
+  }
+
+  @keyframes nn-flow {
+    to {
+      stroke-dashoffset: -40;
+    }
+  }
+
+  @keyframes nn-pulse {
+    0%,
+    100% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 1;
+      stroke: #22d3ee;
+    }
+  }
+</style>

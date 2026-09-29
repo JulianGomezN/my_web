@@ -1,0 +1,108 @@
+# Certifications shown in the "Certifications" section.
+# - `featured: true` shows the card in the top grid (keep between 4 and 6).
+# - `url` is optional: paste the "Show credential" link from LinkedIn.
+#   Without it, the card links to the LinkedIn certifications page.
+# - Categories: ai-cloud | data-science | math-stats | other
+
+- id: aws-ai-practitioner
+  name: AWS Certified AI Practitioner
+  issuer: Amazon Web Services
+  date: '2026-09'
+  expires: '2029-09'
+  category: ai-cloud
+  featured: true
+
+- id: claude-architect-prep
+  name: Claude Certified Architect Prep
+  issuer: DevCompass
+  date: '2026-07'
+  category: ai-cloud
+  featured: true
+
+- id: ibm-explore-emerging-tech
+  name: Explore Emerging Tech
+  issuer: IBM
+  date: '2024-10'
+  category: ai-cloud
+
+- id: ibm-data-analysis-python
+  name: Data Analysis with Python
+  issuer: IBM
+  date: '2026-09'
+  category: data-science
+  featured: true
+
+- id: ibm-databases-sql
+  name: Databases and SQL for Data Science with Python
+  issuer: IBM
+  date: '2026-02'
+  category: data-science
+
+- id: ibm-python-project
+  name: Python Project for Data Science
+  issuer: IBM
+  date: '2025-09'
+  category: data-science
+
+- id: ibm-python-ds-ai-dev
+  name: Python for Data Science, AI & Development
+  issuer: IBM
+  date: '2025-03'
+  category: data-science
+
+- id: ibm-ds-methodology
+  name: Data Science Methodology
+  issuer: IBM
+  date: '2024-09'
+  category: data-science
+
+- id: ibm-tools-ds
+  name: Tools for Data Science
+  issuer: IBM
+  date: '2024-07'
+  category: data-science
+
+- id: ibm-what-is-ds
+  name: What is Data Science?
+  issuer: IBM
+  date: '2024-05'
+  category: data-science
+
+- id: imperial-linear-algebra
+  name: 'Mathematics for Machine Learning: Linear Algebra'
+  issuer: Imperial College London
+  date: '2024-04'
+  category: math-stats
+  featured: true
+
+- id: stanford-statistics
+  name: Introduction to Statistics
+  issuer: Stanford University
+  date: '2024-10'
+  category: math-stats
+  featured: true
+
+- id: sas-hypothesis-testing
+  name: 'Introduction to Statistical Analysis: Hypothesis Testing'
+  issuer: SAS
+  date: '2025-05'
+  category: math-stats
+  featured: true
+
+- id: boulder-algebra-calculus
+  name: Algebra and Differential Calculus for Data Science
+  issuer: University of Colorado Boulder
+  date: '2024-07'
+  category: math-stats
+
+- id: efset-c1
+  name: EF SET English Certificate 61/100 (C1 Advanced)
+  issuer: EF SET
+  date: '2025-07'
+  category: other
+
+- id: austral-python
+  name: Introducción a la programación con Python
+  issuer: Universidad Austral
+  date: '2023-04'
+  category: other

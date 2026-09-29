@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import About from '../../components/About.astro';
+import Skills from '../../components/Skills.astro';
+import Projects from '../../components/Projects.astro';
+import Journey from '../../components/Journey.astro';
+import Certifications from '../../components/Certifications.astro';
+import Contact from '../../components/Contact.astro';
+import type { Lang } from '../../i18n/ui';
+import { supportedLangs } from '../../i18n/utils';
+import { hasPublishedPosts } from '../../lib/blog';
+
+export function getStaticPaths() {
+  return supportedLangs.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const showBlog = await hasPublishedPosts(lang);
+---
+
+<BaseLayout lang={lang} showBlog={showBlog}>
+  <Hero lang={lang} />
+  <About lang={lang} />
+  <Skills lang={lang} />
+  <!-- Sections on trial: to remove one, delete its line here and its id in src/data/sections.ts -->
+  <Projects lang={lang} />
+  <Journey lang={lang} />
+  <Certifications lang={lang} />
+  <Contact lang={lang} />
+</BaseLayout>

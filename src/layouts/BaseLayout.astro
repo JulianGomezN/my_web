@@ -1,0 +1,111 @@
+---
+/**
+ * Shared page shell: <head> (SEO, hreflang, theme), navbar, footer and client scripts.
+ */
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { languages, type Lang } from '../i18n/ui';
+import { getAlternatePath, supportedLangs, useTranslations, withBase } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  /** Show the Blog link in the navbar (only when published posts exist). */
+  showBlog?: boolean;
+  /** Target of the language switch. Defaults to the same page in the other language. */
+  langSwitchHref?: string;
+  /** Emit hreflang alternates. Disable on pages without a translated twin. */
+  alternates?: boolean;
+  /** Marks the current nav item (e.g. 'blog'). */
+  current?: string;
+}
+
+const {
+  lang,
+  title,
+  description,
+  showBlog = false,
+  langSwitchHref,
+  alternates = true,
+  current,
+} = Astro.props;
+
+const t = useTranslations(lang);
+const pageTitle = title ? `${title} · ${t.meta.title}` : t.meta.title;
+const pageDescription = description ?? t.meta.description;
+const site = Astro.site ?? new URL('https://juliangomezn.github.io');
+const pathname = Astro.url.pathname;
+const canonical = new URL(pathname, site).href;
+const otherLang = supportedLangs.find((l) => l !== lang) ?? lang;
+const switchHref = langSwitchHref ?? getAlternatePath(pathname, otherLang);
+const ogLocale = lang === 'es' ? 'es_CO' : 'en_US';
+---
+
+<!doctype html>
+<html lang={lang} class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="author" content="Julian Andres Gomez Niño" />
+    <link rel="canonical" href={canonical} />
+    {
+      alternates &&
+        supportedLangs.map((l) => (
+          <link rel="alternate" hreflang={l} href={new URL(getAlternatePath(pathname, l), site).href} />
+        ))
+    }
+    {alternates && <link rel="alternate" hreflang="x-default" href={new URL(withBase('/'), site).href} />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta name="twitter:card" content="summary" />
+
+    <!-- Dark-first: remove the class before the first paint only if the visitor chose light mode. -->
+    <script is:inline>
+      (function () {
+        try {
+          if (localStorage.getItem('theme') === 'light') document.documentElement.classList.remove('dark');
+        } catch (e) {}
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.classList.add('js-anim');
+        }
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t.a11y.skipToContent}</a>
+    <Navbar
+      lang={lang}
+      showBlog={showBlog}
+      switchHref={switchHref}
+      switchLang={otherLang}
+      switchLangName={languages[otherLang]}
+      current={current}
+    />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+
+    <script>
+      import { initSite } from '../scripts/site';
+      initSite();
+    </script>
+  </body>
+</html>

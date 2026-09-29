@@ -1,248 +1,82 @@
-# Professional Portfolio Website
+# Portafolio · Julian Gomez (AI Developer)
 
-A modern, bilingual (English/Spanish) portfolio website. Features dark/light mode, responsive design, and automated deployment to GitHub Pages.
+Sitio personal bilingüe (inglés / español) hecho con [Astro](https://astro.build). Es estático, dark-first y se despliega en GitHub Pages:
 
-## ✨ Features
+- Inglés: https://juliangomezn.github.io/my_web/en/
+- Español: https://juliangomezn.github.io/my_web/es/
+- La raíz `/my_web/` redirige al idioma guardado o al del navegador.
 
-- 🌐 **Bilingual Support**: Switch between English and Spanish with persistent language preference
-- 🌙 **Dark/Light Mode**: Theme toggle with system preference detection and localStorage persistence
-- 📱 **Fully Responsive**: Optimized for mobile, tablet, and desktop devices
-- ⚡ **Fast & Modern**: Built with TypeScript and Vite for optimal performance
-- 📧 **Contact Form**: Integrated with EmailJS for email functionality without backend
-- 🎨 **Professional Design**: Clean, modern UI with smooth animations
-- 🚀 **Auto Deploy**: GitHub Actions workflow for automatic deployment to GitHub Pages
+## Requisitos
 
-## 🛠️ Tech Stack
+- Node.js **22.12 o superior** (Astro 7). En CI se usa Node 24.
+- npm
 
-- **Frontend**: HTML5, CSS3, TypeScript
-- **Build Tool**: Vite
-- **Email Service**: EmailJS
-- **Hosting**: GitHub Pages
-- **CI/CD**: GitHub Actions
+## Desarrollo local
 
-## 📁 Project Structure
-
-```
-my_web/
-├── .github/
-│   └── workflows/
-│       └── deploy.yml          # GitHub Actions deployment workflow
-├── public/
-│   ├── cv-en.pdf               # English CV (replace with yours)
-│   └── cv-es.pdf               # Spanish CV (replace with yours)
-├── src/
-│   ├── main.ts                 # Main application entry point
-│   ├── theme.ts                # Dark/light mode system
-│   ├── i18n.ts                 # Internationalization system
-│   └── styles.css              # Global styles
-├── index.html                  # Main HTML file
-├── package.json                # Dependencies and scripts
-├── tsconfig.json               # TypeScript configuration
-├── vite.config.ts              # Vite configuration
-└── .gitignore                  # Git ignore rules
+```bash
+npm install
+npm run dev       # http://localhost:4321/my_web/
+npm run build     # astro check (tipos) + build estático en dist/
+npm test          # tests de contenido y del dist/ (requiere build previo)
+npm run preview   # sirve dist/ igual que en producción
 ```
 
-## 🚀 Getting Started
+## Estructura
 
-### Prerequisites
-
-- [Node.js](https://nodejs.org/) (version 18 or higher)
-- [Git](https://git-scm.com/)
-- A GitHub account
-
-### Local Development
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/my_web.git
-   cd my_web
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server**
-   ```bash
-   npm run dev
-   ```
-   The site will be available at `http://localhost:5173`
-
-4. **Build for production**
-   ```bash
-   npm run build
-   ```
-   This creates an optimized build in the `dist/` folder
-
-5. **Preview production build**
-   ```bash
-   npm run preview
-   ```
-
-## 🎨 Customization Guide
-
-### 1. Personal Information
-
-Edit [index.html](index.html) to update:
-- **Line 48**: Your name in the hero section
-- **Lines 67-76**: Social media links (GitHub, LinkedIn, Twitter, Email)
-- **Line 335**: Your email address
-- **Line 341**: Your location
-- **Line 347**: Your GitHub username
-
-### 2. Content Translation
-
-Edit [src/i18n.ts](src/i18n.ts) to customize:
-- English content (lines 60-200)
-- Spanish content (lines 205-345)
-- Projects, skills, about section, etc.
-
-### 3. Projects
-
-Update your projects in [src/i18n.ts](src/i18n.ts):
-- Modify the `projects.items` array for both languages
-- Add project links in [index.html](index.html) (project cards section)
-
-### 4. CV Files
-
-Replace placeholder PDF files:
-1. Export your CV as PDF
-2. Create English version: `public/cv-en.pdf`
-3. Create Spanish version: `public/cv-es.pdf`
-
-### 5. EmailJS Configuration
-
-To enable the contact form:
-
-1. **Sign up at [EmailJS](https://www.emailjs.com/)**
-
-2. **Create an email service**
-   - Go to Email Services
-   - Connect your email provider (Gmail, Outlook, etc.)
-
-3. **Create an email template**
-   - Go to Email Templates
-   - Create a new template with these variables:
-     - `{{from_name}}` - Sender's name
-     - `{{from_email}}` - Sender's email
-     - `{{message}}` - Message content
-     - `{{to_name}}` - Your name
-
-4. **Get your credentials**
-   - Service ID
-   - Template ID
-   - Public Key
-
-5. **Update [src/main.ts](src/main.ts)**
-   ```typescript
-   const EMAILJS_CONFIG = {
-     serviceId: 'your_service_id',
-     templateId: 'your_template_id',
-     publicKey: 'your_public_key',
-   };
-   ```
-
-### 6. Colors & Styling
-
-Modify CSS variables in [src/styles.css](src/styles.css):
-- Light theme colors: lines 10-30
-- Dark theme colors: lines 35-55
-
-## 📦 Deployment to GitHub Pages
-
-### Option 1: Automatic Deployment (Recommended)
-
-The project includes a GitHub Actions workflow that automatically deploys to GitHub Pages on every push to the `main` branch.
-
-**Setup Steps:**
-
-1. **Push your code to GitHub**
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git push origin main
-   ```
-
-2. **Enable GitHub Pages**
-   - Go to your repository on GitHub
-   - Navigate to **Settings** → **Pages**
-   - Under "Source", select **GitHub Actions**
-
-3. **Wait for deployment**
-   - Go to the **Actions** tab
-   - Wait for the workflow to complete (usually 1-2 minutes)
-   - Your site will be live at: `https://yourusername.github.io/my_web/`
-
-### Option 2: Manual Deployment
-
-1. **Build the project**
-   ```bash
-   npm run build
-   ```
-
-2. **Deploy to gh-pages branch**
-   ```bash
-   # Install gh-pages if you haven't
-   npm install -D gh-pages
-   
-   # Deploy
-   npx gh-pages -d dist
-   ```
-
-3. **Enable GitHub Pages**
-   - Go to repository **Settings** → **Pages**
-   - Select `gh-pages` branch as source
-   - Click Save
-
-### Important: Update Base Path
-
-If your repository name is NOT `my_web`, update [vite.config.ts](vite.config.ts):
-
-```typescript
-export default defineConfig({
-  base: '/your-repo-name/',  // Change this to match your repository name
-  // ...
-})
+```
+src/
+  content/
+    projects/{en,es}/*.md      Proyectos (un archivo por idioma, mismo nombre)
+    journey.yaml               Trayectoria: educación, investigación, comunidades
+    certifications.yaml        Certificaciones
+    blog/{en,es}/*.md          Posts (ocultos mientras sean draft)
+    schemas.ts                 Reglas (zod) que valida el build y los tests
+  data/
+    profile.ts                 Email, GitHub, LinkedIn, nombre de los CV
+    skills.ts                  Habilidades e idiomas
+    sections.ts                Secciones de la home y orden del menú
+  i18n/ui.ts                   Todos los textos de interfaz (en / es)
+  components/                  Una sección por componente
+  pages/[lang]/index.astro     Home de cada idioma
+  styles/global.css            Tema oscuro/claro y estilos
+public/cv-julian-gomez-{en,es}.pdf
+tests/                         Vitest
 ```
 
-## 🐛 Troubleshooting
+## Cómo editar el contenido
 
-### Site not loading on GitHub Pages
-- Check that the base path in `vite.config.ts` matches your repository name
-- Verify GitHub Pages is enabled in repository settings
-- Check the Actions tab for deployment errors
+**Agregar un proyecto.** Crea `src/content/projects/en/<slug>.md` y `src/content/projects/es/<slug>.md` con el mismo `<slug>`. Copia el frontmatter de uno existente. `order` define la posición y `status` puede ser `done` o `in-progress`. Si falta la traducción, el test falla.
 
-### Contact form not working
-- Verify EmailJS credentials in `src/main.ts`
-- Check browser console for error messages
-- Ensure EmailJS service and template are active
+**Agregar una certificación.** Añade una entrada en `src/content/certifications.yaml`. Usa `featured: true` para mostrarla arriba (deja entre 4 y 6 destacadas). `url` es opcional: pega ahí el link "Show credential" de LinkedIn. Sin él, la tarjeta enlaza a tu página de certificaciones.
 
-### Styles not applying
-- Clear browser cache
-- Check that `src/styles.css` is imported in `index.html`
-- Verify CSS variables are properly defined
+**Agregar una entrada de trayectoria.** Añade un bloque en `src/content/journey.yaml` con `title` y `points` en `en` y `es`. Si la entrada sigue vigente, omite `end`. El orden en la página es automático.
 
-### Build errors
-- Delete `node_modules/` and run `npm install` again
-- Check Node.js version (should be 18+)
-- Review TypeScript errors in the console
+**Publicar en el blog.** Escribe el post en `src/content/blog/<lang>/<slug>.md` y cambia `draft: true` a `draft: false`. Con al menos un post publicado en un idioma aparecen la página `/blog/` y el link en el menú de ese idioma.
 
-## 📝 License
+**Cambiar textos de interfaz.** Todo está en `src/i18n/ui.ts`. El objeto `es` tiene el mismo tipo que `en`, así que TypeScript avisa si falta una clave.
 
-This project is open source and available under the [MIT License](LICENSE).
+**Actualizar el CV.** Reemplaza los PDF en `public/` manteniendo los nombres.
 
-## 🤝 Contributing
+## Quitar una sección
 
-Contributions, issues, and feature requests are welcome!
+1. Borra su línea en `src/pages/[lang]/index.astro` (por ejemplo, `<Journey lang={lang} />`).
+2. Borra su id en `src/data/sections.ts` para quitarla del menú.
 
-## 👤 Author
+## Tests
 
-**Your Name**
-- GitHub: [@JulianGomezN](https://github.com/JulianGomezN)
-- LinkedIn: [Julian Andres Gomez Niño](https://linkedin.com/in/julian-andres-gomez-niño-b91820186)
-- Email: juliangomezni@gmail.com
+`npm test` corre cuatro suites:
 
----
+- `i18n.test.ts`: paridad de textos en/es, base path, cambio de idioma, detección de idioma.
+- `lib.test.ts`: tema, orden de la trayectoria, agrupación de certificaciones, filtro del blog.
+- `content.test.ts`: valida los archivos de contenido con los mismos esquemas del build.
+- `dist.test.ts`: revisa el sitio generado: cada link interno usa `/my_web/` y existe, CV por idioma, canonical/hreflang, skip link, menú vs. secciones, sin formulario y blog oculto si no hay posts publicados.
 
-Built with ❤️ using TypeScript, Vite, and modern web technologies.
+## Despliegue
+
+`.github/workflows/deploy.yml` corre en cada push a `main`: instala con `npm ci`, ejecuta `npm run build` y `npm test` y, si todo pasa, publica `dist/` en GitHub Pages. En el repositorio, Settings → Pages → Source debe estar en **GitHub Actions**.
+
+Si el repositorio cambia de nombre, actualiza `base` en `astro.config.mjs` y `BASE` en `tests/helpers.ts`.
+
+## Autor
+
+Julian Andres Gomez Niño · [GitHub](https://github.com/JulianGomezN) · [LinkedIn](https://www.linkedin.com/in/julian-andres-gomez-ni%C3%B1o-b91820186/) · juliangomezni@gmail.com

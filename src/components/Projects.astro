@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from './SectionHeader.astro';
+import ProjectCard from './ProjectCard.astro';
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+import { entriesForLang, sortByOrder } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const projects = sortByOrder(entriesForLang(await getCollection('projects'), lang));
+---
+
+<section id="projects" class="section section-alt" aria-labelledby="projects-title">
+  <div class="container">
+    <SectionHeader id="projects-title" label={t.projects.label} title={t.projects.title} subtitle={t.projects.subtitle} />
+
+    <div class="projects-grid">
+      {projects.map((entry) => <ProjectCard lang={lang} project={entry.data} />)}
+    </div>
+  </div>
+</section>

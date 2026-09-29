@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from './SectionHeader.astro';
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+import { entriesForLang } from '../lib/content';
+import { spokenLanguages } from '../data/skills';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Stats come from the content itself, so they stay true when content changes.
+const teamProjects = entriesForLang(await getCollection('projects'), lang).filter((p) => p.data.status === 'done');
+const certCount = (await getCollection('certifications')).length;
+const certLabel = certCount >= 15 ? `${Math.floor(certCount / 5) * 5}+` : String(certCount);
+
+const stats = [
+  { value: String(teamProjects.length), label: t.about.statProjects },
+  { value: certLabel, label: t.about.statCerts },
+  { value: 'C1', label: t.about.statEnglish },
+];
+---
+
+<section id="about" class="section section-alt" aria-labelledby="about-title">
+  <div class="container">
+    <SectionHeader id="about-title" label={t.about.label} title={t.about.title} />
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>{t.about.p1}</p>
+        <p>{t.about.p2}</p>
+        <p>{t.about.p3}</p>
+      </div>
+
+      <aside class="about-side reveal">
+        <dl class="stats">
+          {
+            stats.map((stat) => (
+              <div class="card stat">
+                <dt class="stat-label">{stat.label}</dt>
+                <dd class="stat-number gradient-text">{stat.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+
+        <div class="card languages-card">
+          <h3>{t.about.languagesTitle}</h3>
+          <ul>
+            {
+              spokenLanguages.map((l) => (
+                <li>
+                  <span>{l.name[lang]}</span>
+                  <span class="level">{l.level[lang]}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

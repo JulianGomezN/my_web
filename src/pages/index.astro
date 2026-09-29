@@ -1,0 +1,57 @@
+---
+/**
+ * Root page (/my_web/): sends the visitor to /en/ or /es/.
+ * Order: saved preference -> browser languages -> English.
+ * Without JavaScript, the meta refresh inside <noscript> goes to English.
+ */
+import { languages } from '../i18n/ui';
+import { localePath, supportedLangs } from '../i18n/utils';
+
+const englishUrl = localePath('en');
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Julian Gomez · AI Developer</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={new URL(englishUrl, Astro.site).href} />
+    {supportedLangs.map((l) => <link rel="alternate" hreflang={l} href={new URL(localePath(l), Astro.site).href} />)}
+    <noscript><meta http-equiv="refresh" content={`0; url=${englishUrl}`} /></noscript>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #0b0f1a;
+        color: #e8ebf4;
+        font-family: system-ui, sans-serif;
+      }
+      a {
+        color: #a78bfa;
+        margin: 0 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      {supportedLangs.map((l) => <a href={localePath(l)} hreflang={l} data-lang-link={l}>{languages[l]}</a>)}
+    </p>
+    <script>
+      import { detectPreferredLang, LANG_STORAGE_KEY, localePath } from '../i18n/utils';
+
+      let stored: string | null = null;
+      try {
+        stored = localStorage.getItem(LANG_STORAGE_KEY);
+      } catch {
+        /* storage unavailable */
+      }
+      const lang = detectPreferredLang(stored, navigator.languages ?? [navigator.language]);
+      location.replace(`${localePath(lang)}${location.hash}`);
+    </script>
+  </body>
+</html>

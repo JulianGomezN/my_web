@@ -1,0 +1,18 @@
+---
+interface Props {
+  /** Code-style label, rendered as `// label`. */
+  label: string;
+  title: string;
+  subtitle?: string;
+  /** id of the <h2>, used by aria-labelledby on the section. */
+  id: string;
+}
+
+const { label, title, subtitle, id } = Astro.props;
+---
+
+<header class="section-header reveal">
+  <span class="section-label" aria-hidden="true">// {label}</span>
+  <h2 class="section-title" id={id}>{title}</h2>
+  {subtitle && <p class="section-subtitle">{subtitle}</p>}
+</header>

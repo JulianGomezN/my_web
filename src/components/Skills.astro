@@ -1,0 +1,39 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+import { skillCategories } from '../data/skills';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="skills" class="section" aria-labelledby="skills-title">
+  <div class="container">
+    <SectionHeader id="skills-title" label={t.skills.label} title={t.skills.title} subtitle={t.skills.subtitle} />
+
+    <div class="skills-grid">
+      {
+        skillCategories.map((category) => (
+          <article class="card skill-card reveal">
+            <div class="skill-card-header">
+              <span class="skill-icon" aria-hidden="true">
+                <i class={category.icon} />
+              </span>
+              <h3>{category.title[lang]}</h3>
+            </div>
+            <ul class="tag-list">
+              {category.items.map((item) => (
+                <li class="tech-tag">{item}</li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+---
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+import type { ProjectData } from '../content/schemas';
+
+interface Props {
+  lang: Lang;
+  project: ProjectData;
+}
+
+const { lang, project } = Astro.props;
+const t = useTranslations(lang);
+const inProgress = project.status === 'in-progress';
+---
+
+<article class:list={['card', 'project-card', 'reveal', { 'is-in-progress': inProgress }]}>
+  <div class="project-meta">
+    <span>{project.year}</span>
+    <span class:list={['status-badge', { 'in-progress': inProgress }]}>{t.projects.status[project.status]}</span>
+  </div>
+
+  <h3 class="project-title">{project.title}</h3>
+  <p class="project-summary">{project.summary}</p>
+  <p class="project-role"><span class="visually-hidden">{t.projects.role}: </span>{project.role}</p>
+
+  <ul class="project-highlights">
+    {project.highlights.map((item) => <li>{item}</li>)}
+  </ul>
+
+  <ul class="tag-list" aria-label="Stack">
+    {project.stack.map((tech) => <li class="tech-tag">{tech}</li>)}
+  </ul>
+
+  {
+    project.repo && (
+      <a class="project-link" href={project.repo} target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-github" aria-hidden="true" />
+        <span>
+          {t.projects.viewRepo} {project.title}
+          <span class="visually-hidden"> ({t.a11y.opensNewTab})</span>
+        </span>
+      </a>
+    )
+  }
+</article>

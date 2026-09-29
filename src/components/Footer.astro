@@ -1,0 +1,18 @@
+---
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const t = useTranslations(Astro.props.lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer-container">
+    <p>&copy; {year} Julian Gomez. {t.footer.rights}</p>
+    <p class="mono">{t.footer.built}</p>
+  </div>
+</footer>

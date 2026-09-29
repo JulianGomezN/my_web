@@ -1,0 +1,60 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import type { Lang } from '../i18n/ui';
+import { useTranslations, withBase } from '../i18n/utils';
+import { profile } from '../data/profile';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const cards = [
+  { icon: 'fa-solid fa-envelope', label: t.contact.email, value: profile.email, href: `mailto:${profile.email}` },
+  { icon: 'fa-brands fa-linkedin', label: t.contact.linkedin, value: 'Julian Andres Gomez Niño', href: profile.linkedin, external: true },
+  { icon: 'fa-brands fa-github', label: t.contact.github, value: profile.githubHandle, href: profile.github, external: true },
+  {
+    icon: 'fa-solid fa-file-arrow-down',
+    label: t.contact.cv,
+    value: t.contact.cvAction,
+    href: withBase(`/${profile.cv[lang]}`),
+    download: profile.cvDownloadName,
+  },
+];
+---
+
+<section id="contact" class="section" aria-labelledby="contact-title">
+  <div class="container">
+    <SectionHeader id="contact-title" label={t.contact.label} title={t.contact.title} subtitle={t.contact.subtitle} />
+
+    <ul class="contact-grid">
+      {
+        cards.map((card) => (
+          <li class="reveal">
+            <a
+              class="card contact-card"
+              href={card.href}
+              target={card.external ? '_blank' : undefined}
+              rel={card.external ? 'noopener noreferrer' : undefined}
+              download={card.download}
+            >
+              <i class={card.icon} aria-hidden="true" />
+              <span class="contact-label">{card.label}</span>
+              <span class="contact-value">{card.value}</span>
+              {card.external && <span class="visually-hidden">({t.a11y.opensNewTab})</span>}
+            </a>
+          </li>
+        ))
+      }
+      <li class="reveal">
+        <div class="card contact-card">
+          <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+          <span class="contact-label">{t.contact.location}</span>
+          <span class="contact-value">{t.contact.locationValue}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from './SectionHeader.astro';
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+import { formatYearMonth, localize, sortTimeline } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const entries = sortTimeline((await getCollection('journey')).map((entry) => entry.data));
+---
+
+<section id="journey" class="section" aria-labelledby="journey-title">
+  <div class="container">
+    <SectionHeader id="journey-title" label={t.journey.label} title={t.journey.title} subtitle={t.journey.subtitle} />
+
+    <ol class="timeline">
+      {
+        entries.map((item) => (
+          <li class:list={['card', 'timeline-item', 'reveal', { 'is-featured': item.featured }]}>
+            <div class="timeline-top">
+              <span class="kind-badge">{t.journey.kinds[item.kind]}</span>
+              <span>
+                <time datetime={item.start}>{formatYearMonth(item.start, lang)}</time>
+                {' – '}
+                {item.end ? <time datetime={item.end}>{formatYearMonth(item.end, lang)}</time> : t.journey.present}
+              </span>
+            </div>
+            <h3>{item.title[lang]}</h3>
+            <p class="timeline-org">
+              {item.url ? (
+                <a href={item.url} target="_blank" rel="noopener noreferrer">
+                  {localize(item.org, lang)}
+                  <span class="visually-hidden"> ({t.a11y.opensNewTab})</span>
+                </a>
+              ) : (
+                localize(item.org, lang)
+              )}
+              {' · '}
+              {item.place}
+            </p>
+            <ul class="timeline-points">
+              {item.points[lang].map((point) => (
+                <li>{point}</li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

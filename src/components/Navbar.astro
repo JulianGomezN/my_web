@@ -1,0 +1,92 @@
+---
+import type { Lang } from '../i18n/ui';
+import { localePath, useTranslations } from '../i18n/utils';
+import { sectionIds } from '../data/sections';
+
+interface Props {
+  lang: Lang;
+  showBlog: boolean;
+  switchHref: string;
+  switchLang: Lang;
+  switchLangName: string;
+  current?: string;
+}
+
+const { lang, showBlog, switchHref, switchLang, switchLangName, current } = Astro.props;
+const t = useTranslations(lang);
+const home = localePath(lang);
+
+const links = sectionIds.map((id) => ({ id, href: `${home}#${id}`, label: t.nav[id] }));
+---
+
+<header class="navbar" id="navbar">
+  <nav class="container nav-container" aria-label={t.a11y.mainNav}>
+    <a href={home} class="logo"><span class="prompt" aria-hidden="true">&gt;_</span> julian.gomez</a>
+
+    <ul class="nav-menu" id="nav-menu">
+      {
+        links.map((link) => (
+          <li>
+            <a href={link.href} class="nav-link" data-section={link.id}>
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+      {
+        showBlog && (
+          <li>
+            <a
+              href={localePath(lang, 'blog/')}
+              class="nav-link"
+              aria-current={current === 'blog' ? 'page' : undefined}
+            >
+              {t.nav.blog}
+            </a>
+          </li>
+        )
+      }
+    </ul>
+
+    <div class="nav-actions">
+      <a
+        class="icon-btn"
+        id="lang-switch"
+        href={switchHref}
+        hreflang={switchLang}
+        lang={switchLang}
+        data-lang={switchLang}
+        aria-label={t.a11y.switchLang}
+        title={switchLangName}
+      >
+        <i class="fa-solid fa-globe" aria-hidden="true"></i>
+        {switchLang.toUpperCase()}
+      </a>
+
+      <button
+        class="icon-btn"
+        id="theme-toggle"
+        type="button"
+        aria-label={t.a11y.toLight}
+        data-label-to-light={t.a11y.toLight}
+        data-label-to-dark={t.a11y.toDark}
+      >
+        <i class="fa-solid fa-sun theme-icon-light" aria-hidden="true"></i>
+        <i class="fa-solid fa-moon theme-icon-dark" aria-hidden="true"></i>
+      </button>
+
+      <button
+        class="icon-btn mobile-toggle"
+        id="mobile-toggle"
+        type="button"
+        aria-controls="nav-menu"
+        aria-expanded="false"
+        aria-label={t.a11y.openMenu}
+        data-label-open={t.a11y.openMenu}
+        data-label-close={t.a11y.closeMenu}
+      >
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+  </nav>
+</header>

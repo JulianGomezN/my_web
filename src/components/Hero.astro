@@ -1,0 +1,65 @@
+---
+import { Image } from 'astro:assets';
+import photo from '../assets/foto_pro.jpg';
+import NeuralBg from './NeuralBg.astro';
+import type { Lang } from '../i18n/ui';
+import { useTranslations, withBase } from '../i18n/utils';
+import { profile } from '../data/profile';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const cvHref = withBase(`/${profile.cv[lang]}`);
+---
+
+<section id="hero" class="hero" aria-labelledby="hero-name">
+  <NeuralBg />
+  <div class="container hero-container">
+    <div class="hero-content">
+      <p class="hero-greeting">{t.hero.greeting}</p>
+      <h1 class="hero-name gradient-text" id="hero-name">Julian</h1>
+      <p class="hero-role">
+        <span class="prompt" aria-hidden="true">&gt;_</span>
+        <span>{t.hero.role}</span>
+        <span class="cursor" aria-hidden="true"></span>
+      </p>
+      <p class="hero-description">{t.hero.description}</p>
+
+      <div class="hero-buttons">
+        <a class="btn btn-primary" href={cvHref} download={profile.cvDownloadName} type="application/pdf" id="cv-link">
+          <i class="fa-solid fa-download" aria-hidden="true"></i>
+          {t.hero.downloadCV}
+        </a>
+        <a class="btn btn-ghost" href="#contact">
+          <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+          {t.hero.contactMe}
+        </a>
+      </div>
+
+      <ul class="social-links">
+        <li>
+          <a href={profile.github} target="_blank" rel="noopener noreferrer" aria-label={`GitHub (${t.a11y.opensNewTab})`}>
+            <i class="fa-brands fa-github" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li>
+          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`LinkedIn (${t.a11y.opensNewTab})`}>
+            <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li>
+          <a href={`mailto:${profile.email}`} aria-label={`Email: ${profile.email}`}>
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="hero-photo">
+      <Image src={photo} alt={t.a11y.photoAlt} width={680} loading="eager" fetchpriority="high" />
+    </div>
+  </div>
+</section>
