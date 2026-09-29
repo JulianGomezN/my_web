@@ -1,0 +1,1 @@
+import{n as e,r as t,t as n}from"./utils.BC83KTvc.js";var r=null;try{r=localStorage.getItem(n)}catch{}var i=e(r,navigator.languages??[navigator.language]);location.replace(`${t(i)}${location.hash}`);
