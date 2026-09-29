@@ -73,7 +73,11 @@ tests/                         Vitest
 
 ## Despliegue
 
-`.github/workflows/deploy.yml` corre en cada push a `main`: instala con `npm ci`, ejecuta `npm run build` y `npm test` y, si todo pasa, publica `dist/` en GitHub Pages. En el repositorio, Settings → Pages → Source debe estar en **GitHub Actions**.
+`.github/workflows/deploy.yml` corre en cada push a `main`: instala con `npm ci`, ejecuta `npm run build` y `npm test` y, si todo pasa, copia `dist/` a la rama `gh-pages` como un commit nuevo. GitHub Pages sirve esa rama: Settings → Pages → Source debe estar en **Deploy from a branch**, rama `gh-pages`, carpeta `/ (root)`.
+
+`public/.nojekyll` evita que GitHub procese el sitio con Jekyll, que ignoraría la carpeta `_astro/` (CSS, JS e imágenes). No lo borres.
+
+No hagas merge de `main` en `gh-pages`: esa rama solo contiene el sitio compilado.
 
 Si el repositorio cambia de nombre, actualiza `base` en `astro.config.mjs` y `BASE` en `tests/helpers.ts`.
 

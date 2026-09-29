@@ -37,6 +37,10 @@ describe('pages', () => {
     for (const lang of langs) expect(readDist(`${lang}/index.html`)).toMatch(new RegExp(`<html[^>]*lang="${lang}"`));
   });
 
+  it('includes .nojekyll so GitHub Pages serves the _astro/ folder', () => {
+    expect(existsSync(join(DIST, '.nojekyll'))).toBe(true);
+  });
+
   it('root page redirects without JS to English', () => {
     const html = readDist('index.html');
     expect(html).toContain(`url=${BASE}/en/`);

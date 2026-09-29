@@ -1,5 +1,8 @@
 name: Deploy to GitHub Pages
 
+# Builds the Astro site, runs the tests and publishes dist/ to the `gh-pages` branch.
+# GitHub Pages serves that branch ("Deploy from a branch" → gh-pages / root).
+
 on:
   push:
     branches:
@@ -7,16 +10,14 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write # needed to push to the gh-pages branch
 
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -38,22 +39,28 @@ jobs:
           ASTRO_TELEMETRY_DISABLED: '1'
 
       # Validates content and the generated dist/ (links, base path, SEO, hidden blog).
-      # A failing test blocks the deploy.
+      # A failing test stops the workflow before anything is published.
       - name: Test
         run: npm test
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
+      - name: Publish dist/ to gh-pages
+        run: |
+          set -euo pipefail
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          git fetch origin gh-pages --depth=1
+          git worktree add --detach ../site origin/gh-pages
+
+          # Replace the branch content with the new build (keeps the branch history).
+          find ../site -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -a dist/. ../site/
+
+          cd ../site
+          git add --all
+          if git diff --cached --quiet; then
+            echo "No changes to publish."
+            exit 0
+          fi
+          git commit -m "Deploy ${GITHUB_SHA::7} from main"
+          git push origin HEAD:gh-pages

@@ -18,6 +18,7 @@ El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y e
 - Skip link, foco visible, menú móvil con `aria-expanded` y cierre con Escape.
 - Suite de tests con Vitest (contenido, i18n, helpers y validación del `dist/`).
 - Paso `npm test` en el workflow de despliegue: un test fallido bloquea el deploy.
+- El workflow publica `dist/` en la rama `gh-pages` (Pages sirve desde esa rama) e incluye `.nojekyll` para que se sirva la carpeta `_astro/`.
 - Este CHANGELOG.
 
 ### Changed
