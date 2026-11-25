@@ -1,6 +1,6 @@
 {
   "name": "julian-gomez-portfolio",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "description": "Bilingual (EN/ES) portfolio of Julian Andres Gomez Niño, AI Developer. Built with Astro.",
   "type": "module",

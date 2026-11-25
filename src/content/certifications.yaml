@@ -12,6 +12,15 @@
   category: ai-cloud
   featured: true
 
+- id: aws-cloud-practitioner
+  name: AWS Certified Cloud Practitioner
+  issuer: Amazon Web Services
+  date: '2026-11'
+  expires: '2029-11'
+  category: ai-cloud
+  featured: true
+  url: https://www.credly.com/badges/d5dd0bf5-c5eb-476f-92fe-85f220ae5f28
+
 - id: claude-architect-prep
   name: Claude Certified Architect Prep
   issuer: DevCompass
@@ -73,7 +82,6 @@
   issuer: Imperial College London
   date: '2024-04'
   category: math-stats
-  featured: true
 
 - id: stanford-statistics
   name: Introduction to Statistics
@@ -99,10 +107,4 @@
   name: EF SET English Certificate 61/100 (C1 Advanced)
   issuer: EF SET
   date: '2025-07'
-  category: other
-
-- id: austral-python
-  name: Introducción a la programación con Python
-  issuer: Universidad Austral
-  date: '2023-04'
   category: other

@@ -3,6 +3,22 @@
 Todos los cambios relevantes del sitio se documentan aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y el proyecto usa [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.1.0] - 2026-11-25
+
+### Added
+
+- Certificación **AWS Certified Cloud Practitioner** (Amazon Web Services, vence en noviembre de 2029) como destacada, con link a la credencial en Credly.
+
+### Changed
+
+- "Mathematics for Machine Learning: Linear Algebra" deja de ser destacada para mantener 6 certificaciones en la grilla.
+- CVs descargables en inglés y español reemplazados por versiones que incluyen AWS Certified Cloud Practitioner en la sección de certificados.
+- Versión del paquete actualizada de 2.0.0 a 2.1.0.
+
+### Removed
+
+- Certificación "Introducción a la programación con Python" (Universidad Austral, 2023), la más antigua del listado. El total sigue en 16.
+
 ## [2.0.0] - 2026-09-29
 
 ### Added
